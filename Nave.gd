@@ -10,6 +10,10 @@ func _physics_process(delta): #repetição
 		$SpNaveSt.visible = true
 		$SpNave.visible = false
 		
+	elif position.x < $"../Terra".position.x:
+		velocidade= 0
+		position.x = $"../Terra".position.x
+		
 	elif Input.is_action_pressed("ui_left"): # move e direciona a nave para esquerda
 		rotation_degrees = 180
 		velocidade -= 1 * delta

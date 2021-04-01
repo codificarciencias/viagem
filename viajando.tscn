@@ -62,7 +62,7 @@ __meta__ = {
 rotation = 0.418879
 scale = Vector2( 2, 2 )
 frames = SubResource( 1 )
-frame = 15
+frame = 23
 playing = true
 flip_h = true
 
@@ -113,6 +113,15 @@ margin_bottom = 14.0
 rect_scale = Vector2( 2, 2 )
 text = "velocidade"
 align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="LbDist" type="Label" parent="Controle"]
+margin_right = 40.0
+margin_bottom = 14.0
+rect_scale = Vector2( 2, 2 )
+text = "Deistancia"
 __meta__ = {
 "_edit_use_anchors_": false
 }
