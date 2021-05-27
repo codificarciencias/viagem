@@ -1,7 +1,7 @@
-extends KinematicBody2D
+extends Area2D
 
-var velocidade = 0
-
+export var velocidade = 0
+export var naveVisao = 0
 func _physics_process(delta): #repetição
 	
 	if Input.is_action_pressed("ui_right"): # move e direciona a nave para direita
@@ -41,4 +41,10 @@ func _physics_process(delta): #repetição
 		$SpNave.visible = true
 	
 	translate(Vector2(velocidade, 0)) # realiza o moviento da nave
-	
+
+
+
+
+func _on_Nave_area_entered(area):
+	if area.is_in_group('Sinais'):
+		naveVisao = area.informacao

@@ -3,13 +3,11 @@ extends Node2D
 var dist = 0
 var distancia
 
-
 func _ready():
 	$Refer/GlobCam.make_current()
 	pass
 
 func _process(delta):
-	
 	# Controle da camera global
 	$Refer.position.x = ($Nave.position.x - $Terra.position.x)/2+$Terra.position.x
 	if $Refer.position.x >= 400:
@@ -18,12 +16,15 @@ func _process(delta):
 		$Refer/GlobCam.zoom.y = dist
 		$Refer.scale = Vector2(0.5+dist*2, 0.5+dist*2)
 	
+	# Escolher camera
 	if Input.is_action_just_pressed("ui_up"):
 		if $Refer/GlobCam.current:
 			$Nave/NavCam.make_current()
+		elif $Nave/NavCam.current:
+			$Terra/TerraCam.make_current()
 		else:
 			$Refer/GlobCam.make_current()
-	
+			
 	
 	# Painel de controle e dados ===============================================
 	
@@ -36,3 +37,9 @@ func _process(delta):
 	# Distância entre a nave e o centro da terra
 	distancia = int(($Nave.position.x - $Terra.position.x)*18.57)
 	$Controle/LbDist.text = str(distancia) + ' Km'
+	 
+	# Visão da nave, mostra o que a nave esta observando(tempo nave)
+	$Controle/LbTempoNave.text = 'Tempo nave: '+str($Nave.naveVisao)
+	
+	# emissão do sinal da terra(tempo terra)
+	$Controle/LbTempoTerra.text = 'Tempo terra: '+str($Terra.tempo)
