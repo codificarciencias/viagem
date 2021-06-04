@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=2]
+[gd_scene load_steps=33 format=2]
 
 [ext_resource path="res://image/terra/terra0005.png" type="Texture" id=1]
 [ext_resource path="res://image/terra/terra0006.png" type="Texture" id=2]
@@ -29,6 +29,7 @@
 [ext_resource path="res://image/terra/terra0020.png" type="Texture" id=27]
 [ext_resource path="res://image/terra/terra0013.png" type="Texture" id=28]
 [ext_resource path="res://objetos/Terra.gd" type="Script" id=29]
+[ext_resource path="res://som/sinal2.wav" type="AudioStream" id=30]
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
@@ -52,7 +53,7 @@ __meta__ = {
 rotation = 0.418879
 scale = Vector2( 2, 2 )
 frames = SubResource( 1 )
-frame = 16
+frame = 9
 playing = true
 flip_h = true
 
@@ -60,9 +61,13 @@ flip_h = true
 shape = SubResource( 2 )
 
 [node name="Transmitir" type="Timer" parent="."]
-wait_time = 3.0
+wait_time = 2.0
 autostart = true
 
 [node name="TerraCam" type="Camera2D" parent="."]
 offset = Vector2( 300, 0 )
+
+[node name="TerraSom" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 30 )
+
 [connection signal="timeout" from="Transmitir" to="." method="_on_Transmitir_timeout"]

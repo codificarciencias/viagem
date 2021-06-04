@@ -48,3 +48,5 @@ func _physics_process(delta): #repetição
 func _on_Nave_area_entered(area):
 	if area.is_in_group('Sinais'):
 		naveVisao = area.informacao
+		$SomNave.play()
+		

@@ -4,16 +4,17 @@ export var tempo = 0
 var PreSinalTerra = preload('res://objetos/Sinal.tscn')
 
 
-func _ready():
-	pass
+#func _ready():
+#	pass
 
-func _process(delta):
-	pass
+#func _process(delta):
+#	pass
 
 
-
+# A cada unidade de tempo executa a função
 func _on_Transmitir_timeout():
 	tempo += 1
+	$TerraSom.play()
 	var SinalTerra = PreSinalTerra.instance()
 	SinalTerra.informacao = tempo
 	add_child(SinalTerra)

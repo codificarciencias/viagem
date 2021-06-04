@@ -6,8 +6,8 @@ var distancia
 func _ready():
 	$Refer/GlobCam.make_current()
 	pass
-
-func _process(delta):
+#===============================================================================
+func _process(delta): 
 	# Controle da camera global
 	$Refer.position.x = ($Nave.position.x - $Terra.position.x)/2+$Terra.position.x
 	if $Refer.position.x >= 400:

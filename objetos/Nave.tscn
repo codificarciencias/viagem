@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://image/sprNave.png" type="Texture" id=1]
 [ext_resource path="res://image/sprNaveSt.png" type="Texture" id=2]
 [ext_resource path="res://Nave.gd" type="Script" id=3]
+[ext_resource path="res://som/sinal1.wav" type="AudioStream" id=4]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 58.2911, 34.7069 )
@@ -26,4 +27,8 @@ shape = SubResource( 1 )
 
 [node name="NavCam" type="Camera2D" parent="."]
 current = true
+
+[node name="SomNave" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 4 )
+
 [connection signal="area_entered" from="." to="." method="_on_Nave_area_entered"]

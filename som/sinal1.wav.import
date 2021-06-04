@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/sinal1.wav-5d286763bc893145a19e8483f60442fd.sample"
+
+[deps]
+
+source_file="res://som/sinal1.wav"
+dest_files=[ "res://.import/sinal1.wav-5d286763bc893145a19e8483f60442fd.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0
