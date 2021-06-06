@@ -27,6 +27,7 @@ shape = SubResource( 1 )
 
 [node name="NavCam" type="Camera2D" parent="."]
 current = true
+zoom = Vector2( 2, 2 )
 
 [node name="SomNave" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 4 )
