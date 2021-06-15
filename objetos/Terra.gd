@@ -1,5 +1,5 @@
 extends Area2D
-
+export var ativar = false
 export var tempo = 0
 var PreSinalTerra = preload('res://objetos/Sinal.tscn')
 
@@ -13,11 +13,12 @@ var PreSinalTerra = preload('res://objetos/Sinal.tscn')
 
 # A cada unidade de tempo executa a função
 func _on_Transmitir_timeout():
-	tempo += 1
-	$TerraSom.play()
-	var SinalTerra = PreSinalTerra.instance()
-	SinalTerra.informacao = tempo
-	add_child(SinalTerra)
-	SinalTerra.global_position = global_position
+	if ativar:
+		tempo += 1
+		$TerraSom.play()
+		var SinalTerra = PreSinalTerra.instance()
+		SinalTerra.informacao = tempo
+		add_child(SinalTerra)
+		SinalTerra.global_position = global_position
 	
 	

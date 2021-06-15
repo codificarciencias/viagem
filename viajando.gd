@@ -44,3 +44,9 @@ func _process(delta):
 	
 	# emissão do sinal da terra(tempo terra)
 	$Controle/LbTempoTerra.text = 'Tempo terra: '+str($Terra.tempo)
+	
+	# ativa e desativa emissão da terra
+	if $Controle/CheckButton.pressed:
+		$Terra.ativar = true
+	else:
+		$Terra.ativar = false
