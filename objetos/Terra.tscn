@@ -40,7 +40,7 @@ animations = [ {
 } ]
 
 [sub_resource type="CircleShape2D" id=2]
-radius = 295.002
+radius = 94.9757
 
 [node name="Terra" type="Area2D"]
 position = Vector2( 33.096, 360 )
@@ -53,7 +53,7 @@ __meta__ = {
 rotation = 0.418879
 scale = Vector2( 2, 2 )
 frames = SubResource( 1 )
-frame = 16
+frame = 5
 playing = true
 flip_h = true
 
@@ -70,4 +70,5 @@ zoom = Vector2( 3, 3 )
 
 [node name="TerraSom" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 30 )
+[connection signal="area_entered" from="." to="." method="_on_Terra_area_entered"]
 [connection signal="timeout" from="Transmitir" to="." method="_on_Transmitir_timeout"]

@@ -1,7 +1,11 @@
 extends Area2D
 
 export var velocidade = 0
-export var naveVisao = 0
+var naveVisao = 0
+var naveEmissao = 0
+var ativar = false
+var preNavSinal = preload("res://objetos/SinalNave.tscn")
+
 func _physics_process(delta): #repetição
 	
 	if Input.is_action_pressed("ui_right"): # move e direciona a nave para direita
@@ -44,9 +48,18 @@ func _physics_process(delta): #repetição
 
 
 
-
+# A nave recebe informação do sinal
 func _on_Nave_area_entered(area):
 	if area.is_in_group('Sinais'):
 		naveVisao = area.informacao
 		$SomNave.play()
-		
+
+# a nave emite e soma 1 no sinal
+func _on_NavTempo_timeout():
+	if ativar:
+		naveEmissao += 1
+		var navSinal = preNavSinal.instance()
+		navSinal.informacao = naveEmissao
+		get_parent().add_child(navSinal)
+		$SomNave.play()
+		navSinal.global_position = global_position

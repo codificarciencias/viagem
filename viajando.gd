@@ -3,6 +3,7 @@ extends Node2D
 var dist = 0
 var distancia
 
+
 func _ready():
 	$GlobCam.make_current()
 	pass
@@ -38,15 +39,29 @@ func _process(delta):
 	# Distância entre a nave e o centro da terra
 	distancia = int(($Nave.position.x - $Terra.position.x)*18.57)
 	$Controle/LbDist.text = str(distancia) + ' Km'
-	 
-	# Visão da nave, mostra o que a nave esta observando(tempo nave)
-	$Controle/LbTempoNave.text = 'Tempo nave: '+str($Nave.naveVisao)
 	
-	# emissão do sinal da terra(tempo terra)
-	$Controle/LbTempoTerra.text = 'Tempo terra: '+str($Terra.tempo)
+	# marca emissão do sinal da nave
+	$Controle/NaveEmisao.text = 'Emisão nave: '+str($Nave.naveEmissao)
+	 
+	# registra o que a nave esta vendo
+	$Controle/NaveVisao.text = 'Visão Nave: '+str($Nave.naveVisao)
+	
+	# marca emissão do sinal da terra(tempo terra)
+	$Controle/TerraEmisao.text = 'Emisão terra: '+str($Terra.terraEmissao)
+	
+	# registra o que a terra esta vendo
+	$Controle/TerraVisao.text = 'Visão Terra: '+str($Terra.terraVisao)
 	
 	# ativa e desativa emissão da terra
-	if $Controle/CheckButton.pressed:
+	if $Controle/ChTerra.pressed:
 		$Terra.ativar = true
 	else:
 		$Terra.ativar = false
+	
+	# ativa e desativa emissão da Nave
+	if $Controle/ChNave.pressed:
+		$Nave.ativar = true
+	else:
+		$Nave.ativar = false
+
+
