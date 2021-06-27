@@ -18,15 +18,6 @@ func _process(delta):
 		
 	$Fundo/SpFundo.scale = (Vector2(1.5-dist/200, 1.5-dist/200))
 	
-	# Escolher camera
-	if Input.is_action_just_pressed("ui_up"):
-		if $GlobCam.current:
-			$Nave/NavCam.make_current()
-		elif $Nave/NavCam.current:
-			$Terra/TerraCam.make_current()
-		else:
-			$GlobCam.make_current()
-			
 	
 	# Painel de controle e dados ===============================================
 	
@@ -64,4 +55,14 @@ func _process(delta):
 	else:
 		$Nave.ativar = false
 
-
+## Pausar simulação
+#func _on_BtPause_pressed():
+#	$Controle/BtPause.visible = false
+#	$Controle/BtPlay.visible = true
+#	get_tree().paused = true
+#
+## Play Seguir com a simulação
+#func _on_BtPlay_pressed():
+#	$Controle/BtPlay.visible = false
+#	$Controle/BtPause.visible = true
+#	get_tree().paused = false

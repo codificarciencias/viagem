@@ -1,18 +1,23 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://objetos/Terra.tscn" type="PackedScene" id=1]
 [ext_resource path="res://riscador/Riscar.tscn" type="PackedScene" id=2]
 [ext_resource path="res://image/icoTerra.png" type="Texture" id=3]
 [ext_resource path="res://image/icoNave.png" type="Texture" id=4]
+[ext_resource path="res://image/painel.png" type="Texture" id=5]
+[ext_resource path="res://image/botao/Btn02press.png" type="Texture" id=6]
+[ext_resource path="res://image/botao/Btn02on.png" type="Texture" id=7]
+[ext_resource path="res://image/botao/Btn02.png" type="Texture" id=8]
+[ext_resource path="res://image/botao/btn06.png" type="Texture" id=9]
+[ext_resource path="res://image/botao/btn06on.png" type="Texture" id=10]
+[ext_resource path="res://image/botao/btn06press.png" type="Texture" id=11]
 [ext_resource path="res://objetos/Nave.tscn" type="PackedScene" id=12]
 [ext_resource path="res://image/ceu.jpg" type="Texture" id=13]
+[ext_resource path="res://Processo.gd" type="Script" id=14]
 [ext_resource path="res://viajando.gd" type="Script" id=33]
 
 [node name="Viagem" type="Node2D"]
 script = ExtResource( 33 )
-
-[node name="Riscar" parent="." instance=ExtResource( 2 )]
-z_index = 10
 
 [node name="Fundo" type="CanvasLayer" parent="."]
 layer = -5
@@ -37,9 +42,14 @@ z_index = 2
 [node name="Controle" type="CanvasLayer" parent="."]
 layer = 5
 
-[node name="Panel" type="Panel" parent="Controle"]
+[node name="Riscar" parent="Controle" instance=ExtResource( 2 )]
+z_index = 10
+
+[node name="Panel" type="TextureRect" parent="Controle"]
 anchor_right = 1.0
 margin_bottom = 68.0
+texture = ExtResource( 5 )
+expand = true
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -47,8 +57,8 @@ __meta__ = {
 [node name="LbNaveVel" type="Label" parent="Controle"]
 anchor_left = 0.5
 anchor_right = 0.5
-margin_left = 13.3174
-margin_right = 82.3174
+margin_left = 44.8154
+margin_right = 113.815
 margin_bottom = 14.0
 rect_scale = Vector2( 2, 2 )
 text = "velocidade"
@@ -140,3 +150,42 @@ align = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="BtPlay" type="TextureButton" parent="Controle"]
+pause_mode = 2
+visible = false
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -31.3392
+margin_top = 1.25992
+margin_right = 32.6608
+margin_bottom = 65.2599
+focus_mode = 0
+texture_normal = ExtResource( 8 )
+texture_pressed = ExtResource( 6 )
+texture_hover = ExtResource( 7 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="BtPause" type="TextureButton" parent="Controle"]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -31.3462
+margin_top = 1.00113
+margin_right = 32.6538
+margin_bottom = 65.0011
+focus_mode = 0
+texture_normal = ExtResource( 9 )
+texture_pressed = ExtResource( 10 )
+texture_hover = ExtResource( 11 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Processo" type="Node2D" parent="."]
+pause_mode = 2
+script = ExtResource( 14 )
+
+[connection signal="pressed" from="Controle/BtPlay" to="Processo" method="_on_BtPlay_pressed"]
+[connection signal="pressed" from="Controle/BtPause" to="Processo" method="_on_BtPause_pressed"]
