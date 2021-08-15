@@ -23,25 +23,25 @@ func _process(delta):
 	
 	# mostra velocidade da nave
 	if $Nave.velocidade <= 0:
-		$Controle/LbNaveVel.text = 'Vel = ' + str(int(($Nave.velocidade*-100)/3.33))
+		$Controle/LbNaveVel.text = 'Vel = ' + str(int(($Nave.velocidade*-100)/3.33))+' Mil-Km/s'
 	else:
-		$Controle/LbNaveVel.text = 'Vel = ' + str(int(($Nave.velocidade*100)/3.33))
+		$Controle/LbNaveVel.text = 'Vel = ' + str(int(($Nave.velocidade*100)/3.33))+' Mil-Km/s'
 	
 	# Distância entre a nave e o centro da terra
 	distancia = int(($Nave.position.x - $Terra.position.x)*18.57)
-	$Controle/LbDist.text = str(distancia) + ' Km'
+	$Controle/LbDist.text ='Dist '+ str((distancia)/1000) + ' mil-Km'
 	
 	# marca emissão do sinal da nave
-	$Controle/NaveEmisao.text = 'Emisão nave: '+str($Nave.naveEmissao)
+	$Controle/NaveEmisao.text = str($Nave.naveEmissao)+' Emisão'
 	 
 	# registra o que a nave esta vendo
-	$Controle/NaveVisao.text = 'Visão Nave: '+str($Nave.naveVisao)
+	$Controle/NaveVisao.text = str($Nave.naveVisao)+' Visão'
 	
 	# marca emissão do sinal da terra(tempo terra)
-	$Controle/TerraEmisao.text = 'Emisão terra: '+str($Terra.terraEmissao)
+	$Controle/TerraEmisao.text = 'Emisão '+str($Terra.terraEmissao)
 	
 	# registra o que a terra esta vendo
-	$Controle/TerraVisao.text = 'Visão Terra: '+str($Terra.terraVisao)
+	$Controle/TerraVisao.text = 'Visão '+str($Terra.terraVisao)
 	
 	# ativa e desativa emissão da terra
 	if $Controle/ChTerra.pressed:
@@ -54,15 +54,23 @@ func _process(delta):
 		$Nave.ativar = true
 	else:
 		$Nave.ativar = false
+		
+		
+# cronômetro
+var minuto = 0
+var segundo = 0
+func _on_Cronometro_timeout():
+	if segundo < 10:
+		$Controle/Crono.text = 'Tempo: '+str(minuto)+':0'+str(segundo)
+	else:
+		$Controle/Crono.text = 'Tempo: '+str(minuto)+':'+str(segundo)
+	segundo +=1
+	if segundo == 60:
+		segundo = 0
+		minuto+=1
 
-## Pausar simulação
-#func _on_BtPause_pressed():
-#	$Controle/BtPause.visible = false
-#	$Controle/BtPlay.visible = true
-#	get_tree().paused = true
-#
-## Play Seguir com a simulação
-#func _on_BtPlay_pressed():
-#	$Controle/BtPlay.visible = false
-#	$Controle/BtPause.visible = true
-#	get_tree().paused = false
+
+# Botão reiniciar simulação
+func _on_btnReset_pressed():
+	get_tree().paused = false
+	get_tree().reload_current_scene()

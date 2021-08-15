@@ -29,6 +29,7 @@ flip_h = true
 shape = SubResource( 1 )
 
 [node name="NavCam" type="Camera2D" parent="."]
+offset = Vector2( -1000, 0 )
 current = true
 zoom = Vector2( 2, 2 )
 
@@ -38,5 +39,6 @@ stream = ExtResource( 4 )
 [node name="NavTempo" type="Timer" parent="."]
 wait_time = 2.0
 autostart = true
+
 [connection signal="area_entered" from="." to="." method="_on_Nave_area_entered"]
 [connection signal="timeout" from="NavTempo" to="." method="_on_NavTempo_timeout"]

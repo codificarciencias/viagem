@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://objetos/Terra.tscn" type="PackedScene" id=1]
 [ext_resource path="res://riscador/Riscar.tscn" type="PackedScene" id=2]
@@ -14,6 +14,8 @@
 [ext_resource path="res://objetos/Nave.tscn" type="PackedScene" id=12]
 [ext_resource path="res://image/ceu.jpg" type="Texture" id=13]
 [ext_resource path="res://Processo.gd" type="Script" id=14]
+[ext_resource path="res://image/botao/reset.png" type="Texture" id=15]
+[ext_resource path="res://image/botao/resetPress.png" type="Texture" id=16]
 [ext_resource path="res://viajando.gd" type="Script" id=33]
 
 [node name="Viagem" type="Node2D"]
@@ -32,7 +34,7 @@ position = Vector2( 639.902, 360 )
 scale = Vector2( 2.04392, 1.7258 )
 
 [node name="Terra" parent="." instance=ExtResource( 1 )]
-position = Vector2( -2.53601, 367.858 )
+position = Vector2( -1.03772, 361.865 )
 z_index = 1
 
 [node name="Nave" parent="." instance=ExtResource( 12 )]
@@ -54,24 +56,62 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="Panel2" type="TextureRect" parent="Controle"]
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = -111.0
+texture = ExtResource( 5 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="SelCam" type="Label" parent="Controle/Panel2"]
+margin_left = 7.0
+margin_top = 9.0
+margin_right = 128.0
+margin_bottom = 23.0
+rect_scale = Vector2( 2, 2 )
+text = "camera"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="btnReset" type="TextureButton" parent="Controle/Panel2"]
+pause_mode = 2
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -69.9526
+margin_top = -74.3181
+margin_right = -5.95264
+margin_bottom = -10.3181
+texture_normal = ExtResource( 15 )
+texture_pressed = ExtResource( 16 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="LbNaveVel" type="Label" parent="Controle"]
 anchor_left = 0.5
 anchor_right = 0.5
-margin_left = 44.8154
-margin_right = 113.815
-margin_bottom = 14.0
+margin_left = -629.547
+margin_top = 5.87152
+margin_right = -560.547
+margin_bottom = 19.8715
 rect_scale = Vector2( 2, 2 )
 text = "velocidade"
-align = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="LbDist" type="Label" parent="Controle"]
-margin_left = 454.911
-margin_top = 1.29236
-margin_right = 513.911
-margin_bottom = 15.2924
+margin_left = 10.2858
+margin_top = 37.2807
+margin_right = 69.2858
+margin_bottom = 51.2808
 rect_scale = Vector2( 2, 2 )
 text = "Distancia"
 __meta__ = {
@@ -79,58 +119,73 @@ __meta__ = {
 }
 
 [node name="NaveEmisao" type="Label" parent="Controle"]
-anchor_left = 1.0
-anchor_right = 1.0
-margin_left = -301.003
-margin_top = 40.7371
-margin_right = -207.003
-margin_bottom = 54.7371
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = 140.525
+margin_top = 33.9028
+margin_right = 234.525
+margin_bottom = 47.9028
 rect_scale = Vector2( 2, 2 )
-text = "Nave Emissão:"
+text = "Emissão"
+align = 2
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="NaveVisao" type="Label" parent="Controle"]
-anchor_left = 1.0
-anchor_right = 1.0
-margin_left = -300.924
-margin_top = 3.15791
-margin_right = -222.924
-margin_bottom = 17.1579
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = 147.466
+margin_top = 5.29732
+margin_right = 225.466
+margin_bottom = 19.2973
 rect_scale = Vector2( 2, 2 )
-text = "Nave Visão: "
+text = "Visão"
+align = 2
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="TerraEmisao" type="Label" parent="Controle"]
-margin_left = 2.3541
-margin_top = 2.10604
-margin_right = 103.354
-margin_bottom = 16.106
+margin_left = 286.499
+margin_top = 5.28084
+margin_right = 387.499
+margin_bottom = 19.2808
 rect_scale = Vector2( 2, 2 )
-text = "Terra Emissão:"
+text = "Emissão"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="TerraVisao" type="Label" parent="Controle"]
-margin_left = 1.74646
-margin_top = 38.0692
-margin_right = 75.7465
-margin_bottom = 52.0692
+margin_left = 309.121
+margin_top = 36.3359
+margin_right = 383.122
+margin_bottom = 50.3359
 rect_scale = Vector2( 2, 2 )
-text = "Terra Visão:"
+text = "Visão"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="Crono" type="Label" parent="Controle"]
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -215.691
+margin_top = 17.4614
+margin_right = -167.691
+margin_bottom = 31.4614
+rect_scale = Vector2( 2, 2 )
+text = "Tempo:"
+
+[node name="Cronometro" type="Timer" parent="Controle"]
+autostart = true
+
 [node name="ChTerra" type="CheckButton" parent="Controle"]
-margin_left = 325.873
-margin_top = 7.41359
-margin_right = 441.873
-margin_bottom = 55.4136
+margin_left = 497.137
+margin_top = 10.5884
+margin_right = 613.137
+margin_bottom = 58.5884
 focus_mode = 0
 icon = ExtResource( 3 )
 __meta__ = {
@@ -140,10 +195,10 @@ __meta__ = {
 [node name="ChNave" type="CheckButton" parent="Controle"]
 anchor_left = 1.0
 anchor_right = 1.0
-margin_left = -427.377
-margin_top = 5.90665
-margin_right = -311.377
-margin_bottom = 53.9066
+margin_left = -603.816
+margin_top = 9.08146
+margin_right = -487.816
+margin_bottom = 57.0815
 focus_mode = 0
 icon = ExtResource( 4 )
 align = 1
@@ -187,5 +242,9 @@ __meta__ = {
 pause_mode = 2
 script = ExtResource( 14 )
 
+[node name="ZoomCam" type="Camera2D" parent="Processo"]
+
+[connection signal="pressed" from="Controle/Panel2/btnReset" to="." method="_on_btnReset_pressed"]
+[connection signal="timeout" from="Controle/Cronometro" to="." method="_on_Cronometro_timeout"]
 [connection signal="pressed" from="Controle/BtPlay" to="Processo" method="_on_BtPlay_pressed"]
 [connection signal="pressed" from="Controle/BtPause" to="Processo" method="_on_BtPause_pressed"]
