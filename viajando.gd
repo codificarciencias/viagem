@@ -2,7 +2,7 @@ extends Node2D
 
 var dist = 0
 var distancia
-
+var emitir = ''
 
 func _ready():
 	$GlobCam.make_current()
@@ -18,6 +18,14 @@ func _process(delta):
 		
 	$Fundo/SpFundo.scale = (Vector2(1.5-dist/200, 1.5-dist/200))
 	
+	# ativa e desativa emissão da nave e da terra
+	if emitir == 'terra':
+		$Terra.ativar = true
+	elif emitir == 'nave':
+		$Nave.ativar = true
+	else:
+		$Terra.ativar = false
+		$Nave.ativar = false	
 	
 	# Painel de controle e dados ===============================================
 	
@@ -42,18 +50,6 @@ func _process(delta):
 	
 	# registra o que a terra esta vendo
 	$Controle/TerraVisao.text = 'Visão '+str($Terra.terraVisao)
-	
-	# ativa e desativa emissão da terra
-	if $Controle/ChTerra.pressed:
-		$Terra.ativar = true
-	else:
-		$Terra.ativar = false
-	
-	# ativa e desativa emissão da Nave
-	if $Controle/ChNave.pressed:
-		$Nave.ativar = true
-	else:
-		$Nave.ativar = false
 		
 		
 # cronômetro
@@ -74,3 +70,25 @@ func _on_Cronometro_timeout():
 func _on_btnReset_pressed():
 	get_tree().paused = false
 	get_tree().reload_current_scene()
+
+
+func _on_ChTerra_pressed(): # botao de emissão da Terra
+	if emitir != 'terra':
+		emitir = 'terra'
+		$"Controle/ChTerra/SpAtivado".visible = true
+		$"Controle/ChTerra/SpDesat".visible = false
+	else:
+		emitir = ''
+		$"Controle/ChTerra/SpAtivado".visible = false
+		$"Controle/ChTerra/SpDesat".visible = true
+
+
+func _on_ChNave_pressed(): # botao de emissão da nave
+	if emitir != 'nave':
+		emitir = 'nave'
+		$"Controle/ChNave/Desat".visible = false
+		$"Controle/ChNave/Ativo".visible = true
+	else:
+		emitir = ''
+		$"Controle/ChNave/Desat".visible = true
+		$"Controle/ChNave/Ativo".visible = false

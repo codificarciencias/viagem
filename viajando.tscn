@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=20 format=2]
 
 [ext_resource path="res://objetos/Terra.tscn" type="PackedScene" id=1]
 [ext_resource path="res://riscador/Riscar.tscn" type="PackedScene" id=2]
@@ -16,6 +16,8 @@
 [ext_resource path="res://Processo.gd" type="Script" id=14]
 [ext_resource path="res://image/botao/reset.png" type="Texture" id=15]
 [ext_resource path="res://image/botao/resetPress.png" type="Texture" id=16]
+[ext_resource path="res://image/icoTerraAt.png" type="Texture" id=17]
+[ext_resource path="res://image/icoNaveAt.png" type="Texture" id=18]
 [ext_resource path="res://viajando.gd" type="Script" id=33]
 
 [node name="Viagem" type="Node2D"]
@@ -181,30 +183,49 @@ text = "Tempo:"
 [node name="Cronometro" type="Timer" parent="Controle"]
 autostart = true
 
-[node name="ChTerra" type="CheckButton" parent="Controle"]
-margin_left = 497.137
-margin_top = 10.5884
-margin_right = 613.137
-margin_bottom = 58.5884
+[node name="ChTerra" type="TextureButton" parent="Controle"]
+margin_left = 497.0
+margin_top = 7.0
+margin_right = 549.0
+margin_bottom = 59.0
 focus_mode = 0
-icon = ExtResource( 3 )
+expand = true
+stretch_mode = 3
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="ChNave" type="CheckButton" parent="Controle"]
+[node name="SpDesat" type="Sprite" parent="Controle/ChTerra"]
+texture = ExtResource( 3 )
+centered = false
+
+[node name="SpAtivado" type="Sprite" parent="Controle/ChTerra"]
+visible = false
+texture = ExtResource( 17 )
+centered = false
+
+[node name="ChNave" type="TextureButton" parent="Controle"]
 anchor_left = 1.0
 anchor_right = 1.0
-margin_left = -603.816
-margin_top = 9.08146
-margin_right = -487.816
-margin_bottom = 57.0815
+margin_left = -534.816
+margin_top = 7.08146
+margin_right = -482.816
+margin_bottom = 59.0815
 focus_mode = 0
-icon = ExtResource( 4 )
-align = 1
+expand = true
+stretch_mode = 3
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="Desat" type="Sprite" parent="Controle/ChNave"]
+texture = ExtResource( 4 )
+centered = false
+
+[node name="Ativo" type="Sprite" parent="Controle/ChNave"]
+visible = false
+texture = ExtResource( 18 )
+centered = false
 
 [node name="BtPlay" type="TextureButton" parent="Controle"]
 pause_mode = 2
@@ -246,5 +267,7 @@ script = ExtResource( 14 )
 
 [connection signal="pressed" from="Controle/Panel2/btnReset" to="." method="_on_btnReset_pressed"]
 [connection signal="timeout" from="Controle/Cronometro" to="." method="_on_Cronometro_timeout"]
+[connection signal="pressed" from="Controle/ChTerra" to="." method="_on_ChTerra_pressed"]
+[connection signal="pressed" from="Controle/ChNave" to="." method="_on_ChNave_pressed"]
 [connection signal="pressed" from="Controle/BtPlay" to="Processo" method="_on_BtPlay_pressed"]
 [connection signal="pressed" from="Controle/BtPause" to="Processo" method="_on_BtPause_pressed"]

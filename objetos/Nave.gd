@@ -46,13 +46,7 @@ func _physics_process(delta): #repetição
 	
 	translate(Vector2(velocidade, 0)) # realiza o moviento da nave
 	
-	#ajusta o zoom da camera da nave
-	if Input.is_action_just_released("ZoomMais"):
-		$NavCam.zoom += Vector2(1,1)
-	elif Input.is_action_just_released("ZoomMenos"):
-		$NavCam.zoom -= Vector2(1,1)
-	elif Input.is_action_just_pressed("ZoomCam"):
-		$NavCam.zoom = Vector2(2,2)
+	
 # A nave recebe informação do sinal
 func _on_Nave_area_entered(area):
 	if area.is_in_group('Sinais'):

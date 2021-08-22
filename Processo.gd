@@ -34,7 +34,7 @@ func _process(delta): # loop do FPS
 		elif get_global_mouse_position().x < $ZoomCam.position.x - $ZoomCam.zoom.x*100:
 			$ZoomCam.position.x -= $ZoomCam.zoom.x*10
 		# rolagem do mouse whell
-		if Input.is_action_just_released("ZoomMais"):
+		if Input.is_action_just_released("ZoomMais") and $ZoomCam.zoom > Vector2(1,1):
 			$ZoomCam.zoom -= Vector2(1,1)
 		elif Input.is_action_just_released("ZoomMenos"):
 			$ZoomCam.zoom += Vector2(1,1)
