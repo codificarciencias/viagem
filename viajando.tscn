@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=2]
+[gd_scene load_steps=36 format=2]
 
 [ext_resource path="res://objetos/Terra.tscn" type="PackedScene" id=1]
 [ext_resource path="res://riscador/Riscar.tscn" type="PackedScene" id=2]
@@ -18,7 +18,71 @@
 [ext_resource path="res://image/botao/resetPress.png" type="Texture" id=16]
 [ext_resource path="res://image/icoTerraAt.png" type="Texture" id=17]
 [ext_resource path="res://image/icoNaveAt.png" type="Texture" id=18]
+[ext_resource path="res://fonts/Digital7Mono-B1g5.ttf" type="DynamicFontData" id=19]
+[ext_resource path="res://image/botao/btnCrono.png" type="Texture" id=20]
+[ext_resource path="res://image/botao/btnCronoAt.png" type="Texture" id=21]
+[ext_resource path="res://image/botao/btnCronoPress.png" type="Texture" id=22]
+[ext_resource path="res://som/click.wav" type="AudioStream" id=23]
+[ext_resource path="res://fonts/conthrax-sb.ttf" type="DynamicFontData" id=24]
+[ext_resource path="res://ApIniciar.gd" type="Script" id=25]
+[ext_resource path="res://som/laser.wav" type="AudioStream" id=26]
+[ext_resource path="res://fonts/contra.tres" type="DynamicFont" id=27]
 [ext_resource path="res://viajando.gd" type="Script" id=33]
+
+[sub_resource type="DynamicFont" id=1]
+size = 42
+use_filter = true
+font_data = ExtResource( 19 )
+
+[sub_resource type="Animation" id=2]
+length = 1.8
+tracks/0/type = "value"
+tracks/0/path = NodePath("ApIniciar/LbIniciar:rect_position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.3, 1.2, 1.6 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1280, 299.5 ), Vector2( 550, 299.5 ), Vector2( 400, 299.5 ), Vector2( -460, 299.5 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("ApIniciar/ApLaser:playing")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0.3, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+
+[sub_resource type="DynamicFont" id=3]
+size = 100
+outline_size = 2
+outline_color = Color( 0.792157, 0.792157, 0.792157, 1 )
+use_filter = true
+font_data = ExtResource( 24 )
+
+[sub_resource type="DynamicFont" id=4]
+size = 42
+font_data = ExtResource( 24 )
+
+[sub_resource type="DynamicFont" id=5]
+size = 42
+font_data = ExtResource( 24 )
+
+[sub_resource type="DynamicFont" id=6]
+size = 42
+font_data = ExtResource( 24 )
+
+[sub_resource type="DynamicFont" id=7]
+size = 42
+font_data = ExtResource( 24 )
 
 [node name="Viagem" type="Node2D"]
 script = ExtResource( 33 )
@@ -60,9 +124,9 @@ __meta__ = {
 
 [node name="Panel2" type="TextureRect" parent="Controle"]
 anchor_top = 1.0
-anchor_right = 1.0
 anchor_bottom = 1.0
-margin_top = -111.0
+margin_top = -144.0
+margin_right = 1280.0
 texture = ExtResource( 5 )
 expand = true
 __meta__ = {
@@ -91,7 +155,7 @@ margin_top = -74.3181
 margin_right = -5.95264
 margin_bottom = -10.3181
 texture_normal = ExtResource( 15 )
-texture_pressed = ExtResource( 16 )
+texture_hover = ExtResource( 16 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -99,73 +163,45 @@ __meta__ = {
 [node name="LbNaveVel" type="Label" parent="Controle"]
 anchor_left = 0.5
 anchor_right = 0.5
-margin_left = -629.547
-margin_top = 5.87152
-margin_right = -560.547
-margin_bottom = 19.8715
-rect_scale = Vector2( 2, 2 )
-text = "velocidade"
+margin_left = -630.0
+margin_top = 6.0
+margin_right = -472.0
+margin_bottom = 36.0
+custom_fonts/font = ExtResource( 27 )
+custom_colors/font_color = Color( 0, 1, 0, 1 )
+text = "          000"
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="Label" type="Label" parent="Controle/LbNaveVel"]
+margin_right = 40.0
+margin_bottom = 14.0
+custom_fonts/font = ExtResource( 27 )
+text = "Vel =          Mm/s"
 
 [node name="LbDist" type="Label" parent="Controle"]
 margin_left = 10.2858
 margin_top = 37.2807
 margin_right = 69.2858
 margin_bottom = 51.2808
-rect_scale = Vector2( 2, 2 )
-text = "Distancia"
+custom_fonts/font = ExtResource( 27 )
+text = "Dist/Mm = 000"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="NaveEmisao" type="Label" parent="Controle"]
-anchor_left = 0.5
-anchor_right = 0.5
-margin_left = 140.525
-margin_top = 33.9028
-margin_right = 234.525
-margin_bottom = 47.9028
-rect_scale = Vector2( 2, 2 )
-text = "Emissão"
-align = 2
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="NaveVisao" type="Label" parent="Controle"]
-anchor_left = 0.5
-anchor_right = 0.5
-margin_left = 147.466
-margin_top = 5.29732
-margin_right = 225.466
-margin_bottom = 19.2973
-rect_scale = Vector2( 2, 2 )
-text = "Visão"
-align = 2
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="TerraEmisao" type="Label" parent="Controle"]
-margin_left = 286.499
-margin_top = 5.28084
-margin_right = 387.499
-margin_bottom = 19.2808
-rect_scale = Vector2( 2, 2 )
-text = "Emissão"
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="TerraVisao" type="Label" parent="Controle"]
-margin_left = 309.121
-margin_top = 36.3359
-margin_right = 383.122
-margin_bottom = 50.3359
-rect_scale = Vector2( 2, 2 )
-text = "Visão"
+[node name="BtCrono" type="TextureButton" parent="Controle"]
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -168.251
+margin_top = 6.50169
+margin_right = -4.25098
+margin_bottom = 60.5017
+texture_normal = ExtResource( 20 )
+texture_pressed = ExtResource( 22 )
+texture_hover = ExtResource( 21 )
+expand = true
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -173,48 +209,64 @@ __meta__ = {
 [node name="Crono" type="Label" parent="Controle"]
 anchor_left = 1.0
 anchor_right = 1.0
-margin_left = -215.691
-margin_top = 17.4614
-margin_right = -167.691
-margin_bottom = 31.4614
-rect_scale = Vector2( 2, 2 )
-text = "Tempo:"
+margin_left = -117.943
+margin_top = 16.3082
+margin_right = -6.94336
+margin_bottom = 59.3082
+custom_fonts/font = SubResource( 1 )
+custom_colors/font_color = Color( 0, 1, 0.247059, 1 )
+custom_constants/shadow_as_outline = 7
+text = "0:00"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="Cronometro" type="Timer" parent="Controle"]
-autostart = true
 
 [node name="ChTerra" type="TextureButton" parent="Controle"]
-margin_left = 497.0
-margin_top = 7.0
-margin_right = 549.0
-margin_bottom = 59.0
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -384.0
+margin_top = -128.0
+margin_right = -64.0
+margin_bottom = -16.0
 focus_mode = 0
 expand = true
 stretch_mode = 3
 __meta__ = {
+"_edit_group_": true,
 "_edit_use_anchors_": false
 }
 
 [node name="SpDesat" type="Sprite" parent="Controle/ChTerra"]
 texture = ExtResource( 3 )
 centered = false
+region_enabled = true
+region_rect = Rect2( 0, 0, 320, 110 )
 
 [node name="SpAtivado" type="Sprite" parent="Controle/ChTerra"]
 visible = false
+position = Vector2( 9.53674e-06, 2.95639e-05 )
 texture = ExtResource( 17 )
 centered = false
 
 [node name="ChNave" type="TextureButton" parent="Controle"]
-anchor_left = 1.0
-anchor_right = 1.0
-margin_left = -534.816
-margin_top = 7.08146
-margin_right = -482.816
-margin_bottom = 59.0815
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = 64.0
+margin_top = -128.0
+margin_right = 384.0
+margin_bottom = -16.0
 focus_mode = 0
 expand = true
 stretch_mode = 3
 __meta__ = {
+"_edit_group_": true,
 "_edit_use_anchors_": false
 }
 
@@ -259,13 +311,128 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="ApIniciar" type="AnimationPlayer" parent="Controle"]
+playback_speed = 1.5
+anims/iniciando = SubResource( 2 )
+script = ExtResource( 25 )
+
+[node name="LbIniciar" type="Label" parent="Controle/ApIniciar"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -123.333
+margin_top = -60.5
+margin_right = 335.667
+margin_bottom = 60.5
+custom_fonts/font = SubResource( 3 )
+custom_colors/font_color = Color( 0, 0.360784, 1, 0.270588 )
+text = "INICIAR"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ApLaser" type="AudioStreamPlayer" parent="Controle/ApIniciar"]
+stream = ExtResource( 26 )
+
+[node name="LbMsg" type="Label" parent="Controle"]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = 448.0
+margin_top = -120.0
+margin_right = 529.0
+margin_bottom = -106.0
+rect_scale = Vector2( 2, 2 )
+text = "menssagem"
+align = 1
+uppercase = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="NaveEmisao" type="Label" parent="Controle"]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = 64.0
+margin_top = -72.0
+margin_right = 216.0
+margin_bottom = -21.0
+custom_fonts/font = SubResource( 4 )
+custom_colors/font_color = Color( 1, 1, 0, 1 )
+text = "0"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="NaveVisao" type="Label" parent="Controle"]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = 64.0
+margin_top = -128.0
+margin_right = 216.0
+margin_bottom = -77.0
+custom_fonts/font = SubResource( 5 )
+custom_colors/font_color = Color( 0, 1, 1, 1 )
+text = "0"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TerraEmisao" type="Label" parent="Controle"]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -208.0
+margin_top = -128.0
+margin_right = -64.0
+margin_bottom = -77.0
+custom_fonts/font = SubResource( 6 )
+custom_colors/font_color = Color( 1, 1, 0, 1 )
+text = "0"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TerraVisao" type="Label" parent="Controle"]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -208.0
+margin_top = -72.0
+margin_right = -64.0
+margin_bottom = -21.0
+custom_fonts/font = SubResource( 7 )
+custom_colors/font_color = Color( 0, 1, 1, 1 )
+text = "0"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="Processo" type="Node2D" parent="."]
 pause_mode = 2
 script = ExtResource( 14 )
 
 [node name="ZoomCam" type="Camera2D" parent="Processo"]
 
+[node name="ClickAudio" type="AudioStreamPlayer" parent="Processo"]
+pause_mode = 2
+stream = ExtResource( 23 )
+
 [connection signal="pressed" from="Controle/Panel2/btnReset" to="." method="_on_btnReset_pressed"]
+[connection signal="pressed" from="Controle/BtCrono" to="." method="_on_BtCrono_pressed"]
 [connection signal="timeout" from="Controle/Cronometro" to="." method="_on_Cronometro_timeout"]
 [connection signal="pressed" from="Controle/ChTerra" to="." method="_on_ChTerra_pressed"]
 [connection signal="pressed" from="Controle/ChNave" to="." method="_on_ChNave_pressed"]

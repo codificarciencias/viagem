@@ -52,6 +52,7 @@ func _process(delta): # loop do FPS
 
 # Roda a simulação
 func _on_BtPlay_pressed():
+	$ClickAudio.play()
 	$"../Controle/BtPlay".visible = false
 	$"../Controle/BtPause".visible = true
 	get_tree().paused = false
@@ -59,6 +60,7 @@ func _on_BtPlay_pressed():
 
 # Pausa a simulação
 func _on_BtPause_pressed():
+	$ClickAudio.play()
 	$"../Controle/BtPause".visible = false
 	$"../Controle/BtPlay".visible = true
 	get_tree().paused = true
