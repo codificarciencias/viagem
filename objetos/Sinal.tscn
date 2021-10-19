@@ -21,10 +21,12 @@ position = Vector2( 29.8876, 0 )
 shape = SubResource( 1 )
 
 [node name="LbInfo" type="Label" parent="."]
-margin_left = -9.46404
-margin_top = -7.35162
-margin_right = 49.536
-margin_bottom = 6.64838
+margin_left = -0.793079
+margin_top = -6.68252
+margin_right = 39.2069
+margin_bottom = 7.31748
+align = 1
+valign = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }

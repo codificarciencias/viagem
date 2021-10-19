@@ -34,11 +34,15 @@ func _process(delta):
 	
 	# Painel de controle e dados ===============================================
 	
-	# mostra velocidade da nave
+	# mostra velocidade da nave e rotaciona o velocímetro
 	if $Nave.velocidade <= 0:
-		$Controle/LbNaveVel.text = '          ' + str(int(($Nave.velocidade*-100)/3.33))
+		$Controle/LbNaveVel.text = str(int(($Nave.velocidade*-100)/3.33))
+		$Controle/Velocimetro/Ponteiro.rotation_degrees = ($Nave.velocidade*-12.2)-122
 	else:
-		$Controle/LbNaveVel.text = '          ' + str(int(($Nave.velocidade*100)/3.33))
+		$Controle/LbNaveVel.text = str(int(($Nave.velocidade*100)/3.33))
+		$Controle/Velocimetro/Ponteiro.rotation_degrees = ($Nave.velocidade*12.2)-122
+	
+	
 	
 	# Distância entre a nave e o centro da terra
 	distancia = int(($Nave.position.x - $Terra.position.x)*18.57)
@@ -55,7 +59,8 @@ func _process(delta):
 	
 	# registra o que a terra esta vendo
 	$Controle/TerraVisao.text = str($Terra.terraVisao)
-		
+	
+	
 		
 # função de funcionamento do cronômetro
 var minuto = 0

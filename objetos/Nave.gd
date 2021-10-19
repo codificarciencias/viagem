@@ -10,7 +10,8 @@ func _physics_process(delta): #repetição
 	
 	if Input.is_action_pressed("ui_right"): # move e direciona a nave para direita
 		rotation_degrees = 0
-		velocidade += 1 * delta
+		if velocidade < 20:
+			velocidade += 1 * delta
 		$SpNaveSt.visible = true
 		$SpNave.visible = false
 		
@@ -20,7 +21,8 @@ func _physics_process(delta): #repetição
 		
 	elif Input.is_action_pressed("ui_left"): # move e direciona a nave para esquerda
 		rotation_degrees = 180
-		velocidade -= 1 * delta
+		if velocidade > -20:
+			velocidade -= 1 * delta
 		$SpNaveSt.visible = true
 		$SpNave.visible = false
 		

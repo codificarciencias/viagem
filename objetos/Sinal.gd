@@ -9,7 +9,7 @@ func _process(delta):
 	# velocidade do sinal
 	global_position.x += velSinal * delta
 	# identificador do momento em que o sinal foi emitido
-	$LbInfo.text = 'Dia '+ str(informacao)
+	$LbInfo.text = str(informacao)
 	
 	# auto destruição do sinal para liberar memoria
 	if global_position.x > 70000 or Input.is_action_just_pressed("ui_end"):
