@@ -1,7 +1,7 @@
 extends Node2D
 
 var dist = 0
-var distancia
+var distancia = 0.0
 var emitir = ''
 
 func _ready():
@@ -13,14 +13,15 @@ func _ready():
 	
 	
 #===============================================================================
-func _process(delta): 
+func _process(delta):
+	# Parametro inicial da camera global
 	$GlobCam.position.x = ($Nave.position.x - $Terra.position.x)/2+$Terra.position.x
 	# Controle da camera global
 	if $GlobCam.position.x >= 400:
 		dist = ($Nave.position.x - $Terra.position.x)/1100
 		$GlobCam.zoom.x = dist
 		$GlobCam.zoom.y = dist
-		
+	# Efeito de fundo	
 	$Fundo/SpFundo.scale = (Vector2(1.5-dist/200, 1.5-dist/200))
 	
 	# ativa e desativa emissão da nave e da terra
@@ -30,7 +31,7 @@ func _process(delta):
 		$Nave.ativar = true
 	else:
 		$Terra.ativar = false
-		$Nave.ativar = false	
+		$Nave.ativar = false
 	
 	# Painel de controle e dados ===============================================
 	
@@ -46,7 +47,7 @@ func _process(delta):
 	
 	# Distância entre a nave e o centro da terra
 	distancia = int(($Nave.position.x - $Terra.position.x)*18.57)
-	$Controle/LbDist.text ='Dist/Mm = '+ str((distancia)/33)
+	$Controle/LbDist.text = str((distancia)/33)
 	
 	# marca emissão do sinal da nave
 	$Controle/NaveEmisao.text = str($Nave.naveEmissao)
@@ -75,7 +76,7 @@ func _on_Cronometro_timeout():
 		segundo = 0
 		minuto+=1
 
-# botão do cronômetro: pausar, zerar e reiniciar contagem do tempo
+# botão do cronômetro: pausar, zerar e reiniciar a contagem do tempo
 func _on_BtCrono_pressed(): 
 	minuto = 0
 	segundo = 0

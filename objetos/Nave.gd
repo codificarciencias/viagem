@@ -8,18 +8,14 @@ var preNavSinal = preload("res://objetos/SinalNave.tscn")
 
 func _physics_process(delta): #repetição
 	
-	if Input.is_action_pressed("ui_right"): # move e direciona a nave para direita
+	if Input.is_action_pressed("ui_right") : # move e direciona a nave para direita
 		rotation_degrees = 0
 		if velocidade < 20:
 			velocidade += 1 * delta
 		$SpNaveSt.visible = true
 		$SpNave.visible = false
 		
-	elif position.x < $"../Terra".position.x:
-		velocidade= 0
-		position.x = $"../Terra".position.x
-		
-	elif Input.is_action_pressed("ui_left"): # move e direciona a nave para esquerda
+	elif Input.is_action_pressed("ui_left") : # move e direciona a nave para esquerda
 		rotation_degrees = 180
 		if velocidade > -20:
 			velocidade -= 1 * delta
@@ -47,6 +43,17 @@ func _physics_process(delta): #repetição
 		$SpNave.visible = true
 	
 	translate(Vector2(velocidade, 0)) # realiza o moviento da nave
+	
+	# evita que a nave passe para esquerda da terra
+	if position.x < $"../Terra".position.x:
+		velocidade = 0
+		position.x = $"../Terra".position.x
+	
+	# Limita a distância máxima entre terra e nave
+	if $"..".distancia/33 >= 60000:
+		velocidade = 0
+		position.x = $"../Terra".position.x + 106622
+		$"../Controle/LbMsg".text =str(position.x)
 	
 	
 # A nave recebe informação do sinal

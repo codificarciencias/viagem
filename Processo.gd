@@ -12,18 +12,22 @@ func _process(delta): # loop do FPS
 	# Escolher câmera, a simulação inicia com a câmera global
 	if Input.is_action_just_pressed("ui_up"):
 		if $"../GlobCam".current: # câmera da nave
-			$"../Controle/Panel2/SelCam".text = 'Nave Cam'
+			$"../Controle/Panel2/SelCam/CamNave".visible = true
+			$"../Controle/Panel2/SelCam/CamGlobal".visible = false
 			$"../Nave/NavCam".make_current()
 		elif $"../Nave/NavCam".current:  # câmera da terra
-			$"../Controle/Panel2/SelCam".text = 'Terra Cam'
+			$"../Controle/Panel2/SelCam/CamTerra".visible = true
+			$"../Controle/Panel2/SelCam/CamNave".visible = false
 			$"../Terra/TerraCam".make_current()
 		elif $"../Terra/TerraCam".current: # câmera livre com zoom
-			$"../Controle/Panel2/SelCam".text = 'Zoom Cam'
+			$"../Controle/Panel2/SelCam/CamZoom".visible = true
+			$"../Controle/Panel2/SelCam/CamTerra".visible = false
 			$ZoomCam.make_current()
 			$ZoomCam.position = $"../GlobCam".position
 			$ZoomCam.zoom = $"../GlobCam".zoom
 		else: # retorna para câmera global
-			$"../Controle/Panel2/SelCam".text = 'Global Cam'
+			$"../Controle/Panel2/SelCam/CamGlobal".visible = true
+			$"../Controle/Panel2/SelCam/CamZoom".visible = false
 			$"../GlobCam".make_current()
 	
 	
@@ -33,6 +37,7 @@ func _process(delta): # loop do FPS
 			$ZoomCam.position.x += $ZoomCam.zoom.x*10
 		elif get_global_mouse_position().x < $ZoomCam.position.x - $ZoomCam.zoom.x*100:
 			$ZoomCam.position.x -= $ZoomCam.zoom.x*10
+		
 		# rolagem do mouse whell
 		if Input.is_action_just_released("ZoomMais") and $ZoomCam.zoom > Vector2(1,1):
 			$ZoomCam.zoom -= Vector2(1,1)
