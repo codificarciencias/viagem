@@ -12,6 +12,6 @@ func _process(delta):
 	$LbInfo.text = str(informacao)
 	
 	# auto destruição do sinal para liberar memoria
-	if global_position.x > 70000 or Input.is_action_just_pressed("ui_end"):
+	if global_position.x > 107000 or Input.is_action_just_pressed("ui_end"):
 		queue_free()
 	

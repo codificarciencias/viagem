@@ -69,4 +69,3 @@ func _on_BtPause_pressed():
 	$"../Controle/BtPause".visible = false
 	$"../Controle/BtPlay".visible = true
 	get_tree().paused = true
-

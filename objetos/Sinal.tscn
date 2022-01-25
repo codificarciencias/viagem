@@ -6,9 +6,7 @@
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 30.3858, 63.5667 )
 
-[node name="Sinal" type="Area2D" groups=[
-"Sinais",
-]]
+[node name="Sinal" type="Area2D" groups=["Sinais"]]
 scale = Vector2( 5, 5 )
 script = ExtResource( 2 )
 

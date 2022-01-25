@@ -11,25 +11,25 @@ func _physics_process(delta): #repetição
 	if Input.is_action_pressed("ui_right") : # move e direciona a nave para direita
 		rotation_degrees = 0
 		if velocidade < 20:
-			velocidade += 1 * delta
+			velocidade += 3 * delta
 		$SpNaveSt.visible = true
 		$SpNave.visible = false
 		
 	elif Input.is_action_pressed("ui_left") : # move e direciona a nave para esquerda
 		rotation_degrees = 180
 		if velocidade > -20:
-			velocidade -= 1 * delta
+			velocidade -= 3 * delta
 		$SpNaveSt.visible = true
 		$SpNave.visible = false
 		
 	elif Input.is_action_pressed("ui_down"): # freia e estabiliza a nave
 		if velocidade > 0.5:
-			velocidade-= 5*delta
+			velocidade-= 10*delta
 			rotation_degrees = 180
 			$SpNaveSt.visible = true
 			$SpNave.visible = false
 		if velocidade < -0.5:
-			velocidade += 5*delta
+			velocidade += 10*delta
 			rotation_degrees = 0
 			$SpNaveSt.visible = true
 			$SpNave.visible = false
