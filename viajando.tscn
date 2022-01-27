@@ -1,4 +1,4 @@
-[gd_scene load_steps=44 format=2]
+[gd_scene load_steps=46 format=2]
 
 [ext_resource path="res://objetos/Terra.tscn" type="PackedScene" id=1]
 [ext_resource path="res://riscador/Riscar.tscn" type="PackedScene" id=2]
@@ -29,11 +29,13 @@
 [ext_resource path="res://image/sprDist.png" type="Texture" id=27]
 [ext_resource path="res://image/botao/veloc.png" type="Texture" id=28]
 [ext_resource path="res://image/botao/ponteiro.png" type="Texture" id=29]
+[ext_resource path="res://image/botao/telaCheia.png" type="Texture" id=30]
 [ext_resource path="res://image/camera/globalcam.png" type="Texture" id=31]
 [ext_resource path="res://image/camera/zoomcam.png" type="Texture" id=32]
 [ext_resource path="res://viajando.gd" type="Script" id=33]
 [ext_resource path="res://image/camera/navecam.png" type="Texture" id=34]
 [ext_resource path="res://image/camera/terracam.png" type="Texture" id=35]
+[ext_resource path="res://image/botao/telaHover.png" type="Texture" id=36]
 
 [sub_resource type="DynamicFont" id=1]
 size = 32
@@ -158,6 +160,20 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="btnCheio" type="TextureButton" parent="Controle/Panel"]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = 470.0
+margin_top = 7.0
+margin_right = 546.0
+margin_bottom = 61.0
+texture_normal = ExtResource( 30 )
+texture_hover = ExtResource( 36 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="Panel2" type="TextureRect" parent="Controle"]
 anchor_top = 1.0
 anchor_bottom = 1.0
@@ -233,10 +249,10 @@ centered = false
 [node name="BtCrono" type="TextureButton" parent="Controle"]
 anchor_left = 1.0
 anchor_right = 1.0
-margin_left = -313.337
-margin_top = 6.7859
-margin_right = -150.337
-margin_bottom = 60.7859
+margin_left = -351.0
+margin_top = 7.0
+margin_right = -188.0
+margin_bottom = 61.0
 focus_mode = 0
 enabled_focus_mode = 0
 texture_normal = ExtResource( 20 )
@@ -250,10 +266,10 @@ __meta__ = {
 [node name="Crono" type="Label" parent="Controle"]
 anchor_left = 1.0
 anchor_right = 1.0
-margin_left = -251.324
-margin_top = 17.2433
-margin_right = -140.324
-margin_bottom = 60.2433
+margin_left = -293.0
+margin_top = 18.0
+margin_right = -182.0
+margin_bottom = 61.0
 custom_colors/font_color = Color( 0, 1, 0.247059, 1 )
 custom_constants/shadow_as_outline = 7
 custom_fonts/font = SubResource( 3 )
@@ -488,6 +504,7 @@ pause_mode = 2
 stream = ExtResource( 23 )
 
 [connection signal="pressed" from="Controle/Panel/btnReset" to="." method="_on_btnReset_pressed"]
+[connection signal="pressed" from="Controle/Panel/btnCheio" to="Processo" method="_on_btnCheio_pressed"]
 [connection signal="pressed" from="Controle/BtCrono" to="." method="_on_BtCrono_pressed"]
 [connection signal="timeout" from="Controle/Cronometro" to="." method="_on_Cronometro_timeout"]
 [connection signal="pressed" from="Controle/ChTerra" to="." method="_on_ChTerra_pressed"]

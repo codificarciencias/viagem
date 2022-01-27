@@ -69,3 +69,16 @@ func _on_BtPause_pressed():
 	$"../Controle/BtPause".visible = false
 	$"../Controle/BtPlay".visible = true
 	get_tree().paused = true
+
+
+
+# Maximiza e minimiza a tela cheia
+func _on_btnCheio_pressed():
+	if OS.window_fullscreen == true:
+		OS.window_fullscreen = false
+		$"../Controle/Panel/btnCheio".texture_normal = load("res://image/botao/telaCheia.png")
+		$"../Controle/Panel/btnCheio".texture_hover = load("res://image/botao/telaHover.png")
+	else:
+		OS.window_fullscreen = true
+		$"../Controle/Panel/btnCheio".texture_normal = load("res://image/botao/telaVazia.png")
+		$"../Controle/Panel/btnCheio".texture_hover = load("res://image/botao/telaHover.png")

@@ -6,7 +6,6 @@ var emitir = ''
 
 func _ready():
 	$GlobCam.make_current() # inicializa com a câmera global
-	
 	# inicializa o cronometro com intervalo se 1 segundo pausado e zerado
 	$Controle/Cronometro.start(1)
 	$Controle/Cronometro.paused = true
