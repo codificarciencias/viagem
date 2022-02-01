@@ -7,8 +7,13 @@ func _process(delta): # loop do FPS
 	# Fecha o aplicativo com botao Esc
 	if Input.is_action_just_pressed("ui_cancel"):
 		get_tree().quit()
-
-
+	
+	# Exibe data e hora
+	$"../Controle/LbData".text = str('Data: ', '%02d'% OS.get_date()['day'], '-', 
+	'%02d'% OS.get_date()['month'],'-', OS.get_date()['year'], 
+	' Hora: ', '%02d'% OS.get_time()['hour'],' : ', '%02d'% OS.get_time()['minute'],' : ', 
+	'%02d'% OS.get_time()['second'])
+	
 	# Escolher câmera, a simulação inicia com a câmera global
 	if Input.is_action_just_pressed("ui_up"):
 		if $"../GlobCam".current: # câmera da nave
@@ -74,10 +79,11 @@ func _on_BtPause_pressed():
 
 # Maximiza e minimiza a tela cheia
 func _on_btnCheio_pressed():
+	$ClickAudio.play()
 	if OS.window_fullscreen == true:
 		OS.window_fullscreen = false
 		$"../Controle/Panel/btnCheio".texture_normal = load("res://image/botao/telaCheia.png")
-		$"../Controle/Panel/btnCheio".texture_hover = load("res://image/botao/telaHover.png")
+		$"../Controle/Panel/btnCheio".texture_hover = load("res://image/botao/cheiaHover.png")
 	else:
 		OS.window_fullscreen = true
 		$"../Controle/Panel/btnCheio".texture_normal = load("res://image/botao/telaVazia.png")

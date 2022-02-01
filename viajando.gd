@@ -4,15 +4,19 @@ var dist = 0
 var distancia = 0.0
 var emitir = ''
 
+var tempo = 0
+var tempoPlay = false
+var centezimo = 0
+var segundo = 0
+var minuto = 0
+
 func _ready():
 	$GlobCam.make_current() # inicializa com a câmera global
-	# inicializa o cronometro com intervalo se 1 segundo pausado e zerado
-	$Controle/Cronometro.start(1)
-	$Controle/Cronometro.paused = true
 	
 	
 #===============================================================================
 func _process(delta):
+	
 	# Parametro inicial da camera global
 	$GlobCam.position.x = ($Nave.position.x - $Terra.position.x)/2+$Terra.position.x
 	# Controle da camera global
@@ -62,29 +66,28 @@ func _process(delta):
 	
 	
 		
-# função de funcionamento do cronômetro
-var minuto = 0
-var segundo = 0
-func _on_Cronometro_timeout():
-	if segundo < 10:
-		$Controle/Crono.text = str(minuto)+':0'+str(segundo)
-	else:
-		$Controle/Crono.text = str(minuto)+':'+str(segundo)
-	segundo +=1
-	if segundo == 60:
-		segundo = 0
-		minuto+=1
+# funcionamento do cronômetro depois do play
+	$Controle/Crono.text = str('%02d'% minuto , ':', '%02d'% segundo, ':', '%02d'% centezimo)
+	if tempoPlay == true :
+		tempo += delta
+		centezimo = fmod(tempo, 1)*100
+		segundo = fmod(tempo, 60)
+		minuto = fmod(tempo, 60*60)/60
 
 # botão do cronômetro: pausar, zerar e reiniciar a contagem do tempo
 func _on_BtCrono_pressed(): 
-	minuto = 0
-	segundo = 0
-	$Processo/ClickAudio.play()
-	_on_Cronometro_timeout()
-	if $Controle/Cronometro.paused == true:
-		$Controle/Cronometro.paused = false
-	else:
-		$Controle/Cronometro.paused = true
+	$Processo/ClickAudio.play() # som do botão
+	
+	if tempoPlay == true : # pausa o Cronometro
+		tempoPlay = false
+	elif tempoPlay == false and tempo == 0: # inicia o Cronometro
+		tempoPlay = true
+	elif tempoPlay == false and tempo > 0: # zera o Cronometro
+		tempo = 0
+		centezimo = 0
+		segundo = 0
+		minuto = 0
+	
 
 # Botão reiniciar simulação
 func _on_btnReset_pressed():
