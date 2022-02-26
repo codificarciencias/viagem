@@ -9,7 +9,7 @@ func _process(delta): # loop do FPS
 		get_tree().quit()
 	
 	# Exibe data e hora
-	$"../Controle/LbData".text = str('Data: ', '%02d'% OS.get_date()['day'], '-', 
+	$"../Controle/PainelCima/LbData".text = str('Data: ', '%02d'% OS.get_date()['day'], '-', 
 	'%02d'% OS.get_date()['month'],'-', OS.get_date()['year'], 
 	' Hora: ', '%02d'% OS.get_time()['hour'],' : ', '%02d'% OS.get_time()['minute'],' : ', 
 	'%02d'% OS.get_time()['second'])
@@ -17,22 +17,22 @@ func _process(delta): # loop do FPS
 	# Escolher câmera, a simulação inicia com a câmera global
 	if Input.is_action_just_pressed("ui_up"):
 		if $"../GlobCam".current: # câmera da nave
-			$"../Controle/Panel2/SelCam/CamNave".visible = true
-			$"../Controle/Panel2/SelCam/CamGlobal".visible = false
+			$"../Controle/PainelCima/SelCam/CamNave".visible = true
+			$"../Controle/PainelCima/SelCam/CamGlobal".visible = false
 			$"../Nave/NavCam".make_current()
 		elif $"../Nave/NavCam".current:  # câmera da terra
-			$"../Controle/Panel2/SelCam/CamTerra".visible = true
-			$"../Controle/Panel2/SelCam/CamNave".visible = false
+			$"../Controle/PainelCima/SelCam/CamTerra".visible = true
+			$"../Controle/PainelCima/SelCam/CamNave".visible = false
 			$"../Terra/TerraCam".make_current()
 		elif $"../Terra/TerraCam".current: # câmera livre com zoom
-			$"../Controle/Panel2/SelCam/CamZoom".visible = true
-			$"../Controle/Panel2/SelCam/CamTerra".visible = false
+			$"../Controle/PainelCima/SelCam/CamZoom".visible = true
+			$"../Controle/PainelCima/SelCam/CamTerra".visible = false
 			$ZoomCam.make_current()
 			$ZoomCam.position = $"../GlobCam".position
 			$ZoomCam.zoom = $"../GlobCam".zoom
 		else: # retorna para câmera global
-			$"../Controle/Panel2/SelCam/CamGlobal".visible = true
-			$"../Controle/Panel2/SelCam/CamZoom".visible = false
+			$"../Controle/PainelCima/SelCam/CamGlobal".visible = true
+			$"../Controle/PainelCima/SelCam/CamZoom".visible = false
 			$"../GlobCam".make_current()
 	
 	
@@ -63,16 +63,16 @@ func _process(delta): # loop do FPS
 # Roda a simulação
 func _on_BtPlay_pressed():
 	$ClickAudio.play()
-	$"../Controle/BtPlay".visible = false
-	$"../Controle/BtPause".visible = true
+	$"../Controle/PainelCima/BtPlay".visible = false
+	$"../Controle/PainelCima/BtPause".visible = true
 	get_tree().paused = false
 
 
 # Pausa a simulação
 func _on_BtPause_pressed():
 	$ClickAudio.play()
-	$"../Controle/BtPause".visible = false
-	$"../Controle/BtPlay".visible = true
+	$"../Controle/PainelCima/BtPause".visible = false
+	$"../Controle/PainelCima/BtPlay".visible = true
 	get_tree().paused = true
 
 
@@ -82,9 +82,9 @@ func _on_btnCheio_pressed():
 	$ClickAudio.play()
 	if OS.window_fullscreen == true:
 		OS.window_fullscreen = false
-		$"../Controle/Panel/btnCheio".texture_normal = load("res://image/botao/telaCheia.png")
-		$"../Controle/Panel/btnCheio".texture_hover = load("res://image/botao/cheiaHover.png")
+		$"../Controle/PainelCima/btnCheio".texture_normal = load("res://image/botao/telaCheia.png")
+		$"../Controle/PainelCima/btnCheio".texture_hover = load("res://image/botao/cheiaHover.png")
 	else:
 		OS.window_fullscreen = true
-		$"../Controle/Panel/btnCheio".texture_normal = load("res://image/botao/telaVazia.png")
-		$"../Controle/Panel/btnCheio".texture_hover = load("res://image/botao/telaHover.png")
+		$"../Controle/PainelCima/btnCheio".texture_normal = load("res://image/botao/telaVazia.png")
+		$"../Controle/PainelCima/btnCheio".texture_hover = load("res://image/botao/telaHover.png")

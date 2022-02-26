@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/zoomcam.png-3d1ae55aed4e877901364911b41a616f.stex"
+path="res://.import/ManeteEsq.png-2869179f550d0c3d158b480f8b194c60.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://image/camera/zoomcam.png"
-dest_files=[ "res://.import/zoomcam.png-3d1ae55aed4e877901364911b41a616f.stex" ]
+source_file="res://image/botao/ManeteEsq.png"
+dest_files=[ "res://.import/ManeteEsq.png-2869179f550d0c3d158b480f8b194c60.stex" ]
 
 [params]
 

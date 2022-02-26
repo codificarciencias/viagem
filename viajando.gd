@@ -40,39 +40,54 @@ func _process(delta):
 	
 	# mostra velocidade da nave e rotaciona o velocímetro
 	if $Nave.velocidade <= 0:
-		$Controle/LbNaveVel.text = str(int(($Nave.velocidade*-100)/3.33))
-		$Controle/Velocimetro/Ponteiro.rotation_degrees = ($Nave.velocidade*-12.2)-122
+		$Controle/PainelBaixo/Velocimetro/LbNaveVel.text = str(int(($Nave.velocidade*-100)/3.33))
+		$Controle/PainelBaixo/Velocimetro/Ponteiro.rotation_degrees = ($Nave.velocidade*-12.2)-122
 	else:
-		$Controle/LbNaveVel.text = str(int(($Nave.velocidade*100)/3.33))
-		$Controle/Velocimetro/Ponteiro.rotation_degrees = ($Nave.velocidade*12.2)-122
-	
+		$Controle/PainelBaixo/Velocimetro/LbNaveVel.text = str(int(($Nave.velocidade*100)/3.33))
+		$Controle/PainelBaixo/Velocimetro/Ponteiro.rotation_degrees = ($Nave.velocidade*12.2)-122
 	
 	
 	# Distância entre a nave e o centro da terra
 	distancia = int(($Nave.position.x - $Terra.position.x)*18.57)
-	$Controle/LbDist.text = str((distancia)/33)
+	$Controle/PainelCima/LbDist.text = str((distancia)/33)
 	
 	# marca emissão do sinal da nave
-	$Controle/NaveEmisao.text = str($Nave.naveEmissao)
+	$Controle/PainelBaixo/ChNave/NaveEmisao.text = str($Nave.naveEmissao)
 	 
 	# registra o que a nave esta vendo
-	$Controle/NaveVisao.text = str($Nave.naveVisao)
+	$Controle/PainelBaixo/ChNave/NaveVisao.text = str($Nave.naveVisao)
 	
 	# marca emissão do sinal da terra(tempo terra)
-	$Controle/TerraEmisao.text = str($Terra.terraEmissao)
+	$Controle/PainelBaixo/ChTerra/TerraEmisao.text = str($Terra.terraEmissao)
 	
 	# registra o que a terra esta vendo
-	$Controle/TerraVisao.text = str($Terra.terraVisao)
+	$Controle/PainelBaixo/ChTerra/TerraVisao.text = str($Terra.terraVisao)
 	
 	
 		
 # funcionamento do cronômetro depois do play
-	$Controle/Crono.text = str('%02d'% minuto , ':', '%02d'% segundo, ':', '%02d'% centezimo)
+	$Controle/PainelCima/BtCrono/Crono.text = str('%02d'% minuto , ':', '%02d'% segundo, ':', '%02d'% centezimo)
 	if tempoPlay == true :
 		tempo += delta
 		centezimo = fmod(tempo, 1)*100
 		segundo = fmod(tempo, 60)
 		minuto = fmod(tempo, 60*60)/60
+
+
+# faz a unificaçao dos botões do teclado com os da tela
+	if Input.is_action_pressed("ui_down"):
+		_on_BtEstab_pressed()
+	elif Input.is_action_just_released("ui_down"):
+		_on_BtEstab_released()
+	elif Input.is_action_pressed("ui_right"):
+		_on_BtDir_pressed()
+	elif Input.is_action_just_released("ui_right"):
+		_on_BtDir_released()
+	elif Input.is_action_pressed("ui_left"):
+		_on_BtEsq_pressed()
+	elif Input.is_action_just_released("ui_left"):
+		_on_BtEsq_released()
+		
 
 # botão do cronômetro: pausar, zerar e reiniciar a contagem do tempo
 func _on_BtCrono_pressed(): 
@@ -99,22 +114,49 @@ func _on_ChTerra_pressed(): # botao de emissão da Terra
 	$Processo/ClickAudio.play()
 	if emitir != 'terra':
 		emitir = 'terra'
-		$"Controle/ChTerra/SpAtivado".visible = true
-		$"Controle/ChTerra/SpDesat".visible = false
+		$"Controle/PainelBaixo/ChTerra/SpAtivado".visible = true
+		$"Controle/PainelBaixo/ChTerra/SpDesat".visible = false
 	else:
 		emitir = ''
-		$"Controle/ChTerra/SpAtivado".visible = false
-		$"Controle/ChTerra/SpDesat".visible = true
+		$"Controle/PainelBaixo/ChTerra/SpAtivado".visible = false
+		$"Controle/PainelBaixo/ChTerra/SpDesat".visible = true
 
 
 func _on_ChNave_pressed(): # botao de emissão da nave
 	$Processo/ClickAudio.play()
 	if emitir != 'nave':
 		emitir = 'nave'
-		$"Controle/ChNave/Desat".visible = false
-		$"Controle/ChNave/Ativo".visible = true
+		$"Controle/PainelBaixo/ChNave/Desat".visible = false
+		$"Controle/PainelBaixo/ChNave/Ativo".visible = true
 	else:
 		emitir = ''
-		$"Controle/ChNave/Desat".visible = true
-		$"Controle/ChNave/Ativo".visible = false
+		$"Controle/PainelBaixo/ChNave/Desat".visible = true
+		$"Controle/PainelBaixo/ChNave/Ativo".visible = false
 
+
+
+func _on_BtDir_pressed():
+	$Controle/PainelBaixo/Manete.texture = load("res://image/botao/ManeteDir.png")
+	$Nave.nvdirecao='dir'
+
+func _on_BtDir_released():
+	$Controle/PainelBaixo/Manete.texture = load("res://image/botao/ManeteCentro.png")
+	$Nave.nvdirecao = 'meio'
+
+func _on_BtEsq_pressed():
+	$Controle/PainelBaixo/Manete.texture = load("res://image/botao/ManeteEsq.png")
+	$Nave.nvdirecao = 'esq'
+	
+func _on_BtEsq_released():
+	$Controle/PainelBaixo/Manete.texture = load("res://image/botao/ManeteCentro.png")
+	$Nave.nvdirecao = 'meio'
+
+
+func _on_BtEstab_pressed():
+	$Controle/PainelBaixo/BtEstab.normal = load("res://image/botao/BtnFrearon.png")
+	$Nave.nvdirecao = 'estab'
+
+
+func _on_BtEstab_released():
+	$Controle/PainelBaixo/BtEstab.normal = load("res://image/botao/BtnFrear.png")
+	$Nave.nvdirecao = 'meio'
