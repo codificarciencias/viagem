@@ -1,3 +1,7 @@
+#*******************************************************************************
+# Funcionalidades do objeto Terra
+#*******************************************************************************
+
 extends Area2D
 
 export var nvdirecao = 'meio'
@@ -7,7 +11,7 @@ var naveEmissao = 0
 var ativar = false
 var preNavSinal = preload("res://objetos/SinalNave.tscn")
 
-func _physics_process(delta): #repetição
+func _physics_process(delta): 
 	
 	if Input.is_action_pressed("ui_right") or nvdirecao == 'dir': # move e direciona a nave para direita
 		_nav_dir(delta)
@@ -36,13 +40,15 @@ func _physics_process(delta): #repetição
 		$"../Controle/LbMsg".text =str(position.x)
 	
 	
-# A nave recebe informação do sinal
+# Ocorre quando o sinal emitido pela Terra chega na Nave
+# Soma 1 no painel de recepção da Nave
 func _on_Nave_area_entered(area):
 	if area.is_in_group('Sinais'):
 		naveVisao = area.informacao
 		$SomNave.play()
 
-# a nave emite e soma 1 no sinal
+# A Nave emite e identifica o sinal com um número inteiro.
+# Soma 1 no painel de emissão da nave
 func _on_NavTempo_timeout():
 	if ativar:
 		naveEmissao += 1

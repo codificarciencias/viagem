@@ -1,3 +1,7 @@
+#*******************************************************************************
+# Funcionalidades do objeto Sinal (LUZ) emitido pela nave
+#*******************************************************************************
+
 extends Area2D
 
 export var velSinalN = -600
@@ -7,8 +11,9 @@ func _ready():
 	pass
 
 func _process(delta):
-	# velocidade do sinal
-	global_position.x += velSinalN * delta
+	# velocidade do sinal sem influencia da velocidade da nave(referencial de emissão)
+	global_position.x += velSinalN * delta # velocidade da luz
+	
 	# identificador do momento em que o sinal foi emitido
 	$LbInfo.text = str(informacao)
 	

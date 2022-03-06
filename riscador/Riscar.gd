@@ -1,29 +1,30 @@
+# marcador para apontar e destacar objetos na tela
+
 # ******************************************************************************
 #    ADICIONAR ENTRADA DO MOUSE EM CONFIGURAÇÃO DO PROJETO PARA FUNCIONAR
 # ******************************************************************************
 
 extends Node2D
 
-# riscador
 var riscar = preload("res://riscador/Risco.tscn")
 var lista = []
 var cont
 
 
 func _ready():
-	#limpa e inicia o riscador
+	#limpa e inicia o marcador
 	cont = 0
 	lista.clear()
 	lista.append(riscar.instance())
 	add_child(lista[0])
 
 
-
+# ciclo de quadros por segundo (FPS) ===========================================
 func _process(delta):
-#Eventos do riscador
-# ******************************************************************************
-#    ADICIONAR ENTRADA DO MOUSE EM CONFIGURAÇÃO DO PROJETO PARA FUNCIONAR
-# ******************************************************************************
+
+# Eventos do riscador
+
+#    ENTRADA DO MOUSE
 	if Input.is_action_just_pressed("mouseRigth"): # limpar tela
 		_ready()
 		

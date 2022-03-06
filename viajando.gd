@@ -1,3 +1,7 @@
+#*******************************************************************************
+# Funcionalidades de controle da simulação
+#*******************************************************************************
+
 extends Node2D
 
 var dist = 0
@@ -14,7 +18,7 @@ func _ready():
 	$GlobCam.make_current() # inicializa com a câmera global
 	
 	
-#===============================================================================
+# ciclo de quadros por segundo (FPS) ===========================================
 func _process(delta):
 	
 	# Parametro inicial da camera global
@@ -134,29 +138,29 @@ func _on_ChNave_pressed(): # botao de emissão da nave
 		$"Controle/PainelBaixo/ChNave/Ativo".visible = false
 
 
-
-func _on_BtDir_pressed():
+# Inicio do código de controle da Manete de movimento da nave (((
+func _on_BtDir_pressed(): # Pressionar manete para direita
 	$Controle/PainelBaixo/Manete.texture = load("res://image/botao/ManeteDir.png")
 	$Nave.nvdirecao='dir'
 
-func _on_BtDir_released():
+func _on_BtDir_released(): # liberar manete
 	$Controle/PainelBaixo/Manete.texture = load("res://image/botao/ManeteCentro.png")
 	$Nave.nvdirecao = 'meio'
 
-func _on_BtEsq_pressed():
+func _on_BtEsq_pressed():  # Pressionar manete para esquerda
 	$Controle/PainelBaixo/Manete.texture = load("res://image/botao/ManeteEsq.png")
 	$Nave.nvdirecao = 'esq'
 	
 func _on_BtEsq_released():
-	$Controle/PainelBaixo/Manete.texture = load("res://image/botao/ManeteCentro.png")
-	$Nave.nvdirecao = 'meio'
+	_on_BtDir_released()
+# Fim do bloco de controle da manete )))
 
 
+# Botão de estabilizar ou repousar a nave
 func _on_BtEstab_pressed():
 	$Controle/PainelBaixo/BtEstab.normal = load("res://image/botao/BtnFrearon.png")
 	$Nave.nvdirecao = 'estab'
-
-
+# Liberar botão estabilizar
 func _on_BtEstab_released():
 	$Controle/PainelBaixo/BtEstab.normal = load("res://image/botao/BtnFrear.png")
 	$Nave.nvdirecao = 'meio'
