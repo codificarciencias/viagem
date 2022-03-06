@@ -6,7 +6,8 @@ extends Node2D
 
 var dist = 0
 var distancia = 0.0
-var emitir = ''
+var emitirNave = false
+var emitirTerra = false
 
 var tempo = 0
 var tempoPlay = false
@@ -32,13 +33,13 @@ func _process(delta):
 	$Fundo/SpFundo.scale = (Vector2(1.5-dist/200, 1.5-dist/200))
 	
 	# ativa e desativa emissão da nave e da terra
-	if emitir == 'terra':
-		$Terra.ativar = true
-	elif emitir == 'nave':
-		$Nave.ativar = true
-	else:
-		$Terra.ativar = false
-		$Nave.ativar = false
+#	if emitirTerra:
+#		$Terra.ativar = true
+#	elif emitirNave:
+#		$Nave.ativar = true
+#	else:
+#		$Terra.ativar = false
+#		$Nave.ativar = false
 	
 	# Painel de controle e dados ===============================================
 	
@@ -116,26 +117,30 @@ func _on_btnReset_pressed():
 
 func _on_ChTerra_pressed(): # botao de emissão da Terra
 	$Processo/ClickAudio.play()
-	if emitir != 'terra':
-		emitir = 'terra'
-		$"Controle/PainelBaixo/ChTerra/SpAtivado".visible = true
-		$"Controle/PainelBaixo/ChTerra/SpDesat".visible = false
+	var BtTerra = $"Controle/PainelBaixo/ChTerra"
+	
+	if emitirTerra == true :
+		BtTerra.texture_normal = load("res://image/icoTerra.png")
+		$Terra.ativar = false
+		emitirTerra = false
 	else:
-		emitir = ''
-		$"Controle/PainelBaixo/ChTerra/SpAtivado".visible = false
-		$"Controle/PainelBaixo/ChTerra/SpDesat".visible = true
+		BtTerra.texture_normal = load("res://image/icoTerraAt.png")
+		$Terra.ativar = true
+		emitirTerra = true
 
 
 func _on_ChNave_pressed(): # botao de emissão da nave
 	$Processo/ClickAudio.play()
-	if emitir != 'nave':
-		emitir = 'nave'
-		$"Controle/PainelBaixo/ChNave/Desat".visible = false
-		$"Controle/PainelBaixo/ChNave/Ativo".visible = true
+	var BtNave = $"Controle/PainelBaixo/ChNave"
+	
+	if emitirNave == true:
+		BtNave.texture_normal = load("res://image/icoNave.png")
+		$Nave.ativar = false
+		emitirNave = false
 	else:
-		emitir = ''
-		$"Controle/PainelBaixo/ChNave/Desat".visible = true
-		$"Controle/PainelBaixo/ChNave/Ativo".visible = false
+		BtNave.texture_normal = load("res://image/icoNaveAt.png")
+		$Nave.ativar = true
+		emitirNave = true
 
 
 # Inicio do código de controle da Manete de movimento da nave (((

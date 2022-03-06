@@ -27,8 +27,8 @@ func _process(delta):
 #    ENTRADA DO MOUSE
 	if Input.is_action_just_pressed("mouseRigth"): # limpar tela
 		_ready()
-		
-	elif Input.is_action_pressed("mouseLeft"): #risca a tela
+	#risca a tela com shift pressionado (Riscador = shift)	
+	elif Input.is_action_pressed("mouseLeft") and Input.is_action_pressed("Riscador"):
 		lista[cont].add_point(Vector2(get_global_mouse_position().x, get_global_mouse_position().y))
 	
 	elif Input.is_action_just_released("mouseLeft"): # carrega novo risco

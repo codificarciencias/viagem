@@ -24,11 +24,18 @@ func _process(delta):
 	
 	# Operações de zoom da câmera
 	if $ZoomCam.current and Input.is_action_pressed("Zoom"):
+		$"../Controle/SpCamCur".visible = true
 		if get_global_mouse_position().x > $ZoomCam.position.x + $ZoomCam.zoom.x*100 :
 			$ZoomCam.position.x += $ZoomCam.zoom.x*10
+			$"../Controle/SpCamCur".texture = load("res://image/camera/curssorCam.png")
+			$"../Controle/SpCamCur".flip_h = false
 		elif get_global_mouse_position().x < $ZoomCam.position.x - $ZoomCam.zoom.x*100:
 			$ZoomCam.position.x -= $ZoomCam.zoom.x*10
-		
+			$"../Controle/SpCamCur".texture = load("res://image/camera/curssorCam.png")
+			$"../Controle/SpCamCur".flip_h = true
+		else:
+			$"../Controle/SpCamCur".texture = load("res://image/camera/curssorZoom.png")
+			
 		# rolagem da roda do mouse
 		if Input.is_action_just_released("ZoomMais") and $ZoomCam.zoom > Vector2(1,1):
 			$ZoomCam.zoom -= Vector2(1,1)
@@ -37,7 +44,10 @@ func _process(delta):
 		elif Input.is_action_just_pressed("ZoomCam"):
 			$ZoomCam.position = $"../GlobCam".position
 			$ZoomCam.zoom = $"../GlobCam".zoom
-	
+	else:
+		$"../Controle/SpCamCur".visible = false
+		
+		
 	# Botao pause ao pressionar Enter
 	if Input.is_action_just_pressed("ui_accept"):
 		if get_tree().paused :
