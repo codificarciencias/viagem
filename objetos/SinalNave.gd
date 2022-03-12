@@ -4,7 +4,7 @@
 
 extends Area2D
 
-export var velSinalN = -600
+const velSinalN = -600
 export var informacao = 0
 
 func _ready():

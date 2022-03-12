@@ -1,10 +1,11 @@
 #*******************************************************************************
 # Funcionalidades do objeto Sinal (LUZ) emitido pela Terra
 #*******************************************************************************
-
 extends Node2D
-export var velSinal = 600
+
+const velSinal = 600
 export var informacao = 0
+
 
 func _ready():
 	pass

@@ -24,6 +24,7 @@ func _process(delta):
 	
 	# Operações de zoom da câmera
 	if $ZoomCam.current and Input.is_action_pressed("Zoom"):
+		# mostra o cursor de movimento da câmera
 		$"../Controle/SpCamCur".visible = true
 		if get_global_mouse_position().x > $ZoomCam.position.x + $ZoomCam.zoom.x*100 :
 			$ZoomCam.position.x += $ZoomCam.zoom.x*10

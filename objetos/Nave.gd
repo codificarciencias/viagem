@@ -13,14 +13,14 @@ var preNavSinal = preload("res://objetos/SinalNave.tscn")
 
 func _physics_process(delta): 
 	
-	if Input.is_action_pressed("ui_right") or nvdirecao == 'dir': # move e direciona a nave para direita
+	if Input.is_action_pressed("ui_down") or nvdirecao == 'estab':# freia e estabiliza a nave
+		_nave_freio(delta)
+		
+	elif Input.is_action_pressed("ui_right") or nvdirecao == 'dir': # move e direciona a nave para direita
 		_nav_dir(delta)
 		
 	elif Input.is_action_pressed("ui_left") or nvdirecao == 'esq': # move e direciona a nave para esquerda
 		_nav_esq(delta)
-		
-	elif Input.is_action_pressed("ui_down") or nvdirecao == 'estab':# freia e estabiliza a nave
-		_nave_freio(delta)
 		
 	else: # apenas troca a imagem da nave para apagado
 		$SpNaveSt.visible = false
@@ -75,7 +75,7 @@ func _nav_esq(delta): # Função: move e direciona a nave para esquerda
 	$SpNave.visible = false
 	
 
-func _nave_freio(delta): # Função: freia e estabiliza a nave
+func _nave_freio(delta): # Função: freia e estabiliza a nave	
 	if velocidade > 0.5:
 		velocidade-= 10*delta
 		rotation_degrees = 180

@@ -32,14 +32,6 @@ func _process(delta):
 	# Efeito de fundo	
 	$Fundo/SpFundo.scale = (Vector2(1.5-dist/200, 1.5-dist/200))
 	
-	# ativa e desativa emissão da nave e da terra
-#	if emitirTerra:
-#		$Terra.ativar = true
-#	elif emitirNave:
-#		$Nave.ativar = true
-#	else:
-#		$Terra.ativar = false
-#		$Nave.ativar = false
 	
 	# Painel de controle e dados ===============================================
 	
@@ -156,7 +148,7 @@ func _on_BtEsq_pressed():  # Pressionar manete para esquerda
 	$Controle/PainelBaixo/Manete.texture = load("res://image/botao/ManeteEsq.png")
 	$Nave.nvdirecao = 'esq'
 	
-func _on_BtEsq_released():
+func _on_BtEsq_released(): # liberar manete
 	_on_BtDir_released()
 # Fim do bloco de controle da manete )))
 
@@ -164,8 +156,10 @@ func _on_BtEsq_released():
 # Botão de estabilizar ou repousar a nave
 func _on_BtEstab_pressed():
 	$Controle/PainelBaixo/BtEstab.normal = load("res://image/botao/BtnFrearon.png")
+	$Controle/PainelBaixo/Manete.texture = load("res://image/botao/ManeteCentro.png")
 	$Nave.nvdirecao = 'estab'
+	
 # Liberar botão estabilizar
 func _on_BtEstab_released():
 	$Controle/PainelBaixo/BtEstab.normal = load("res://image/botao/BtnFrear.png")
-	$Nave.nvdirecao = 'meio'
+	_on_BtDir_released()
