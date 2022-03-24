@@ -431,7 +431,7 @@ rotation = 0.418879
 scale = Vector2( 2, 2 )
 frames = SubResource( 104 )
 animation = "rotacao"
-frame = 65
+frame = 50
 playing = true
 
 [node name="SpAtmosfera" type="Sprite" parent="."]
