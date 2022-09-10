@@ -1,5 +1,5 @@
 #*******************************************************************************
-# Funcionalidades do objeto Terra
+# Funcionalidades do objeto Nave
 #*******************************************************************************
 
 extends Area2D
@@ -25,6 +25,7 @@ func _physics_process(delta):
 	else: # apenas troca a imagem da nave para apagado
 		$SpNaveSt.visible = false
 		$SpNave.visible = true
+		$SomMotor.stop()
 	
 	translate(Vector2(velocidade, 0)) # realiza o moviento da nave
 	
@@ -45,6 +46,7 @@ func _physics_process(delta):
 func _on_Nave_area_entered(area):
 	if area.is_in_group('Sinais'):
 		naveVisao = area.informacao
+		$SomNave.pitch_scale = 0.7
 		$SomNave.play()
 
 # A Nave emite e identifica o sinal com um número inteiro.
@@ -55,6 +57,7 @@ func _on_NavTempo_timeout():
 		var navSinal = preNavSinal.instance()
 		navSinal.informacao = naveEmissao
 		get_parent().add_child(navSinal)
+		$SomNave.pitch_scale = 1
 		$SomNave.play()
 		navSinal.global_position = global_position
 
@@ -63,16 +66,27 @@ func _nav_dir(delta): # Função: move e direciona a nave para direita
 	rotation_degrees = 0
 	if velocidade < 20:
 		velocidade += 3 * delta
-	$SpNaveSt.visible = true
-	$SpNave.visible = false
+		_Ligar_motor()
+		$SpNaveSt.visible = true
+		$SpNave.visible = false
+	else:
+		$SomMotor.stop()
+		$SpNaveSt.visible = false
+		$SpNave.visible = true
 
 
 func _nav_esq(delta): # Função: move e direciona a nave para esquerda
 	rotation_degrees = 180
 	if velocidade > -20:
 		velocidade -= 3 * delta
-	$SpNaveSt.visible = true
-	$SpNave.visible = false
+		_Ligar_motor()
+		$SpNaveSt.visible = true
+		$SpNave.visible = false
+	else:
+		$SomMotor.stop()
+		$SpNaveSt.visible = false
+		$SpNave.visible = true
+	
 	
 
 func _nave_freio(delta): # Função: freia e estabiliza a nave	
@@ -81,12 +95,19 @@ func _nave_freio(delta): # Função: freia e estabiliza a nave
 		rotation_degrees = 180
 		$SpNaveSt.visible = true
 		$SpNave.visible = false
+		_Ligar_motor()
 	if velocidade < -0.5:
 		velocidade += 10*delta
 		rotation_degrees = 0
 		$SpNaveSt.visible = true
 		$SpNave.visible = false
+		_Ligar_motor()
 	if velocidade > -0.5 and velocidade < 0.5:
 		$SpNaveSt.visible = false
 		$SpNave.visible = true
 		velocidade = 0
+		$SomMotor.stop()
+
+func _Ligar_motor():
+	if $SomMotor.playing == false:
+		$SomMotor.play()

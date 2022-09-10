@@ -1,8 +1,13 @@
 # marcador para apontar e destacar objetos na tela
 
 # ******************************************************************************
-#    ADICIONAR ENTRADA DO MOUSE EM CONFIGURAÇÃO DO PROJETO PARA FUNCIONAR
+#    ADICIONAR ENTRADAS EM CONFIGURAÇÃO DO PROJETO PARA FUNCIONAR
 # ******************************************************************************
+#Entradas
+	# mouseRigth = atribuir botão direito do mouse
+	# mouseLeft = atribuir botão Esquerdo do mouse
+	# Riscador = atribuir tecla que ativa a caneta para riscar(shift)
+# Arrastar a cena Riscar.tscn como no filho da cena principal
 
 extends Node2D
 
@@ -35,4 +40,4 @@ func _process(delta):
 		cont+=1
 		lista.append(riscar.instance())
 		add_child(lista[cont])
-	#fim do evento do riscador	
+	#fim do evento do riscador

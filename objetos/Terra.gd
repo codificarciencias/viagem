@@ -15,6 +15,7 @@ var PreSinalTerra = preload('res://objetos/Sinal.tscn')
 func _on_Transmitir_timeout():
 	if ativar: # ao acionar o botão de emissão da terra
 		terraEmissao += 1
+		$TerraSom.pitch_scale = 1
 		$TerraSom.play()
 		var SinalTerra = PreSinalTerra.instance()
 		SinalTerra.informacao = terraEmissao
@@ -26,6 +27,7 @@ func _on_Transmitir_timeout():
 func _on_Terra_area_entered(area):
 	if area.is_in_group('NaveSinal'):
 		terraVisao = area.informacao
+		$TerraSom.pitch_scale = 0.8
 		$TerraSom.play()
 	
 		area.queue_free()

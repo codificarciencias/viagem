@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/sinal1.mp3-cbedd922cd278ba96f3d79ec8c8e8813.mp3str"
+
+[deps]
+
+source_file="res://som/sinal1.mp3"
+dest_files=[ "res://.import/sinal1.mp3-cbedd922cd278ba96f3d79ec8c8e8813.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0

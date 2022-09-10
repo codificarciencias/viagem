@@ -73,17 +73,19 @@ func _process(delta):
 
 # faz a unificaçao dos botões do teclado com os da tela
 	if Input.is_action_pressed("ui_down"):
-		_on_BtEstab_pressed()
+		$Controle/PainelBaixo/BtEstab.texture_normal = load("res://image/botao/BtnFrearon.png")
+		_on_BtEstab_button_down()		
 	elif Input.is_action_just_released("ui_down"):
-		_on_BtEstab_released()
+		$Controle/PainelBaixo/BtEstab.texture_normal = load("res://image/botao/BtnFrear.png")
+		_on_BtEstab_button_up()
 	elif Input.is_action_pressed("ui_right"):
-		_on_BtDir_pressed()
+		_on_BtDir_button_down()
 	elif Input.is_action_just_released("ui_right"):
-		_on_BtDir_released()
+		_on_BtDir_button_up()
 	elif Input.is_action_pressed("ui_left"):
-		_on_BtEsq_pressed()
+		_on_BtEsq_button_down()
 	elif Input.is_action_just_released("ui_left"):
-		_on_BtEsq_released()
+		_on_BtEsq_button_up()
 		
 
 # botão do cronômetro: pausar, zerar e reiniciar a contagem do tempo
@@ -135,31 +137,34 @@ func _on_ChNave_pressed(): # botao de emissão da nave
 		emitirNave = true
 
 
+	
 # Inicio do código de controle da Manete de movimento da nave (((
-func _on_BtDir_pressed(): # Pressionar manete para direita
+func _on_BtDir_button_down(): # Pressionar manete para direita
 	$Controle/PainelBaixo/Manete.texture = load("res://image/botao/ManeteDir.png")
 	$Nave.nvdirecao='dir'
 
-func _on_BtDir_released(): # liberar manete
+
+func _on_BtDir_button_up(): # liberar manete
 	$Controle/PainelBaixo/Manete.texture = load("res://image/botao/ManeteCentro.png")
 	$Nave.nvdirecao = 'meio'
 
-func _on_BtEsq_pressed():  # Pressionar manete para esquerda
+
+func _on_BtEsq_button_down(): # Pressionar manete para esquerda
 	$Controle/PainelBaixo/Manete.texture = load("res://image/botao/ManeteEsq.png")
 	$Nave.nvdirecao = 'esq'
-	
-func _on_BtEsq_released(): # liberar manete
-	_on_BtDir_released()
+
+
+func _on_BtEsq_button_up(): # liberar manete
+	_on_BtDir_button_up()
 # Fim do bloco de controle da manete )))
 
 
+
 # Botão de estabilizar ou repousar a nave
-func _on_BtEstab_pressed():
-	$Controle/PainelBaixo/BtEstab.normal = load("res://image/botao/BtnFrearon.png")
+func _on_BtEstab_button_down():
 	$Controle/PainelBaixo/Manete.texture = load("res://image/botao/ManeteCentro.png")
 	$Nave.nvdirecao = 'estab'
-	
+
 # Liberar botão estabilizar
-func _on_BtEstab_released():
-	$Controle/PainelBaixo/BtEstab.normal = load("res://image/botao/BtnFrear.png")
-	_on_BtDir_released()
+func _on_BtEstab_button_up():
+	_on_BtDir_button_up()
